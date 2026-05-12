@@ -204,7 +204,7 @@
     const filtered = mangas.filter(m => {
       const matchQ = !q ||
         (m.title||"").toLowerCase().includes(q) ||
-        (m.desc||"").toLowerCase().includes(q) ||
+        (m.description||"").toLowerCase().includes(q) ||
         (m.tags||"").toLowerCase().includes(q);
       const matchTag = !activeTag || (m.tags||"").split(",").map(t=>t.trim()).includes(activeTag);
       return matchQ && matchTag;
@@ -235,7 +235,7 @@
           </div>
           <div class="card-body">
             <div class="card-title">${m.title}</div>
-            <div class="card-desc">${m.desc||''}</div>
+            <div class="card-desc">${m.description||''}</div>
             <div class="tags">${tagList.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
           </div>
         </div>`;
@@ -260,7 +260,7 @@
         </div>
         <div class="detail-info">
           <div class="detail-title">${m.title}</div>
-          <div class="detail-desc">${m.desc||''}</div>
+          <div class="detail-desc">${m.description||''}</div>
           <div class="tags">${tagList.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
         </div>
       </div>
@@ -287,13 +287,13 @@
   }
 
   async function addManga() {
-    const title = document.getElementById("fTitle").value.trim();
-    const cover = document.getElementById("fCover").value.trim();
-    const desc  = document.getElementById("fDesc").value.trim();
-    const tags  = document.getElementById("fTags").value.trim();
+    const title       = document.getElementById("fTitle").value.trim();
+    const cover       = document.getElementById("fCover").value.trim();
+    const description = document.getElementById("fDesc").value.trim();
+    const tags        = document.getElementById("fTags").value.trim();
 
-    if (!title) { showToast("El título es obligatorio ✿"); return; }
-    if (!desc)  { showToast("La descripción es obligatoria ✿"); return; }
+    if (!title)       { showToast("El título es obligatorio ✿"); return; }
+    if (!description) { showToast("La descripción es obligatoria ✿"); return; }
 
     const btn = document.getElementById("btnSave");
     btn.disabled = true;
@@ -303,7 +303,7 @@
       const res = await fetch(`${SUPABASE_URL}/rest/v1/mangas`, {
         method: "POST",
         headers: { ...HEADERS, "Prefer": "return=representation" },
-        body: JSON.stringify({ title, cover, desc, tags })
+        body: JSON.stringify({ title, cover, description, tags })
       });
       if (!res.ok) throw new Error("Error " + res.status);
       const [nuevo] = await res.json();
@@ -329,3 +329,4 @@
 </script>
 </body>
 </html>
+

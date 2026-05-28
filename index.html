@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Biblioteca Yuri ✿</title>
+  <title>Base Yuri ✿</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
@@ -12,21 +12,37 @@
       --pink-50: #FDF0F5; --pink-100: #F9D4E4; --pink-200: #F2A8C8;
       --pink-400: #D4537E; --pink-600: #993556; --pink-800: #5C1830;
       --cream: #FAF7F4; --text: #2a1a1f; --text-muted: #7a5a64;
-      --border: rgba(180,80,110,0.15); --border-hover: rgba(180,80,110,0.35);
+      --border: rgba(180,80,110,0.15);
     }
     html { scroll-behavior: smooth; }
     body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text); min-height: 100vh; }
 
-    .hero { background: var(--pink-800); padding: 3rem 2rem 2.5rem; position: relative; overflow: hidden; }
+    /* HERO */
+    .hero {
+      background: var(--pink-800);
+      padding: 3rem 2rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
     .hero::before { content: '✿ ✾ ✿ ✾ ✿ ✾ ✿ ✾ ✿ ✾ ✿ ✾ ✿ ✾ ✿ ✾'; position: absolute; top: 12px; left: 0; right: 0; text-align: center; font-size: 11px; letter-spacing: 6px; color: rgba(255,255,255,0.15); pointer-events: none; }
     .hero::after  { content: '✿ ✾ ✿ ✾ ✿ ✾ ✿ ✾ ✿ ✾ ✿ ✾ ✿ ✾ ✿ ✾'; position: absolute; bottom: 12px; left: 0; right: 0; text-align: center; font-size: 11px; letter-spacing: 6px; color: rgba(255,255,255,0.15); pointer-events: none; }
-    .hero-inner { max-width: 860px; margin: 0 auto; text-align: center; }
+    .hero-inner { max-width: 860px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
+    .hero-img { width: 140px; margin: 0 auto 1.25rem; display: block; filter: drop-shadow(0 4px 16px rgba(0,0,0,0.35)); }
     .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem,5vw,3.2rem); font-weight: 600; color: #fff; letter-spacing: -0.02em; line-height: 1.15; }
     .hero h1 em { font-style: italic; color: var(--pink-200); }
     .hero p { margin-top: 0.75rem; font-size: 15px; color: rgba(255,255,255,0.55); font-weight: 300; letter-spacing: 0.04em; }
 
-    .main { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+    /* TIPO TABS */
+    .tipo-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 1.5rem; }
+    .tipo-tab { padding: 10px 20px; font-size: 14px; font-weight: 500; color: var(--text-muted); background: transparent; border: none; border-bottom: 2px solid transparent; cursor: pointer; transition: all 0.15s; font-family: 'DM Sans', sans-serif; }
+    .tipo-tab:hover { color: var(--pink-600); }
+    .tipo-tab.active { color: var(--pink-800); border-bottom-color: var(--pink-800); }
 
+    /* MAIN */
+    .main { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
     .toolbar { display: flex; gap: 10px; margin-bottom: 1.25rem; flex-wrap: wrap; align-items: center; }
     .search-wrap { flex: 1; min-width: 200px; position: relative; }
     .search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted); pointer-events: none; }
@@ -54,6 +70,7 @@
     .card-desc { font-size: 12px; color: var(--text-muted); line-height: 1.55; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 9px; }
     .tags { display: flex; gap: 4px; flex-wrap: wrap; }
     .tag { font-size: 10px; padding: 2px 8px; border-radius: 999px; background: var(--pink-50); color: var(--pink-600); border: 1px solid var(--pink-100); font-weight: 500; }
+    .tipo-badge { font-size: 10px; padding: 2px 8px; border-radius: 999px; background: #EEF2FF; color: #4338CA; border: 1px solid #C7D2FE; font-weight: 500; }
 
     .state-msg { grid-column: 1/-1; text-align: center; padding: 4rem 1rem; color: var(--text-muted); }
     .state-msg .emoji { font-size: 3rem; margin-bottom: 1rem; }
@@ -71,7 +88,8 @@
     .detail-cover img { width: 100%; height: 100%; object-fit: cover; }
     .detail-cover-placeholder { font-size: 2.5rem; opacity: 0.35; }
     .detail-info { flex: 1; }
-    .detail-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 600; color: var(--text); line-height: 1.2; margin-bottom: 10px; }
+    .detail-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 600; color: var(--text); line-height: 1.2; margin-bottom: 6px; }
+    .detail-tipo { font-size: 12px; color: #4338CA; background: #EEF2FF; border: 1px solid #C7D2FE; border-radius: 999px; padding: 2px 10px; display: inline-block; margin-bottom: 10px; font-weight: 500; }
     .detail-desc { font-size: 14px; color: var(--text-muted); line-height: 1.65; margin-bottom: 14px; }
     .detail-footer { border-top: 1px solid var(--border); padding: 1rem 1.5rem; display: flex; justify-content: flex-end; }
     .btn-close { padding: 8px 20px; border-radius: 8px; border: 1px solid var(--border); background: transparent; font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--text-muted); cursor: pointer; transition: all 0.15s; }
@@ -81,12 +99,12 @@
     .form-modal h2 { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 600; color: var(--text); margin-bottom: 1.25rem; }
     .form-group { margin-bottom: 14px; }
     .form-group label { display: block; font-size: 12px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 5px; }
-    .form-group input, .form-group textarea { width: 100%; padding: 9px 12px; border: 1px solid var(--border); border-radius: 9px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--text); background: var(--cream); outline: none; transition: border-color 0.15s; }
-    .form-group input:focus, .form-group textarea:focus { border-color: var(--pink-400); background: #fff; }
+    .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 9px 12px; border: 1px solid var(--border); border-radius: 9px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--text); background: var(--cream); outline: none; transition: border-color 0.15s; }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--pink-400); background: #fff; }
     .form-group textarea { height: 90px; resize: vertical; }
     .form-hint { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
     .form-actions { display: flex; gap: 8px; margin-top: 6px; }
-    .btn-save { flex: 1; padding: 10px; background: var(--pink-800); color: #fff; border: none; border-radius: 9px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; transition: background 0.15s; }
+    .btn-save { flex: 1; padding: 10px; background: var(--pink-800); color: #fff; border: none; border-radius: 9px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; }
     .btn-save:hover { background: var(--pink-600); }
     .btn-save:disabled { opacity: 0.6; cursor: not-allowed; }
     .btn-cancel { padding: 10px 16px; background: transparent; border: 1px solid var(--border); border-radius: 9px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--text-muted); cursor: pointer; }
@@ -94,43 +112,47 @@
 
     .toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%); background: var(--pink-800); color: #fff; padding: 10px 24px; border-radius: 999px; font-size: 14px; z-index: 999; opacity: 0; transition: opacity 0.3s; pointer-events: none; white-space: nowrap; }
     .toast.show { opacity: 1; }
-
     footer { text-align: center; padding: 2rem; font-size: 12px; color: var(--text-muted); border-top: 1px solid var(--border); }
-
-    @media (max-width: 480px) {
-      .detail-top { flex-direction: column; }
-      .detail-cover { width: 100%; aspect-ratio: 3/2; }
-    }
+    @media (max-width: 480px) { .detail-top { flex-direction: column; } .detail-cover { width: 100%; aspect-ratio: 3/2; } }
   </style>
 </head>
 <body>
 
 <header class="hero">
   <div class="hero-inner">
-    <h1>Biblioteca <em>Yuri</em> ✿</h1>
-    <p>Recomendaciones del grupo · Mangas para explorar y descubrir</p>
+    <img class="hero-img" src="https://i.imgur.com/3HSo0hz.png" alt="Base Yuri" />
+    <h1>Base <em>Yuri</em> ✿</h1>
+    <p>Recomendaciones del grupo · Anime · Manga · Novela ligera</p>
   </div>
 </header>
 
 <main class="main">
   <div class="toolbar">
     <div class="search-wrap">
-      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
       <input type="text" id="search" placeholder="Buscar por título, descripción o género..." oninput="renderGrid()" />
     </div>
     <button class="btn-add" onclick="openForm()">
-      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
-      Agregar manga
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+      Agregar
     </button>
   </div>
+
+  <div class="tipo-tabs" id="tipoTabs">
+    <button class="tipo-tab active" data-tipo="todos" onclick="setTipo('todos')">Todos</button>
+    <button class="tipo-tab" data-tipo="Manga" onclick="setTipo('Manga')">Manga</button>
+    <button class="tipo-tab" data-tipo="Anime" onclick="setTipo('Anime')">Anime</button>
+    <button class="tipo-tab" data-tipo="Novela ligera" onclick="setTipo('Novela ligera')">Novela ligera</button>
+  </div>
+
   <div class="filters" id="filters"></div>
   <p class="results-count" id="count"></p>
   <div class="grid" id="grid">
-    <div class="state-msg"><div class="spinner"></div><p>Cargando biblioteca...</p></div>
+    <div class="state-msg"><div class="spinner"></div><p>Cargando...</p></div>
   </div>
 </main>
 
-<footer>✿ &nbsp; Recomendaciones del Adashima server  &nbsp; ✿</footer>
+<footer>✿ &nbsp; Base Yuri — Hecho con amor por fans del género &nbsp; ✿</footer>
 
 <!-- DETAIL MODAL -->
 <div class="overlay" id="detailOverlay" onclick="closeDetail(event)">
@@ -140,19 +162,27 @@
 <!-- FORM MODAL -->
 <div class="overlay" id="formOverlay" onclick="closeFormOverlay(event)">
   <div class="form-modal">
-    <h2>Agregar manga ✿</h2>
+    <h2>Agregar ✿</h2>
+    <div class="form-group">
+      <label>Tipo *</label>
+      <select id="fTipo">
+        <option value="Manga">Manga</option>
+        <option value="Anime">Anime</option>
+        <option value="Novela ligera">Novela ligera</option>
+      </select>
+    </div>
     <div class="form-group">
       <label>Título *</label>
-      <input type="text" id="fTitle" placeholder="Nombre del manga" />
+      <input type="text" id="fTitle" placeholder="Nombre" />
     </div>
     <div class="form-group">
       <label>URL de portada</label>
       <input type="text" id="fCover" placeholder="https://..." />
-      <p class="form-hint">Opcional — enlace directo a la imagen de portada</p>
+      <p class="form-hint">Opcional — enlace directo a la imagen</p>
     </div>
     <div class="form-group">
       <label>Descripción *</label>
-      <textarea id="fDesc" placeholder="¿De qué trata el manga?"></textarea>
+      <textarea id="fDesc" placeholder="¿De qué trata?"></textarea>
     </div>
     <div class="form-group">
       <label>Géneros</label>
@@ -171,29 +201,34 @@
 <script>
   const SUPABASE_URL = "https://sykmqqjsasrnnlimjizn.supabase.co";
   const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN5a21xcWpzYXNybm5saW1qaXpuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg1NTk0NzYsImV4cCI6MjA5NDEzNTQ3Nn0.liPt12vhOxnZTm9T7PzJp7reVRd_ELq3N6L85HfNQcc";
-  const HEADERS = {
-    "Content-Type": "application/json",
-    "apikey": SUPABASE_KEY,
-    "Authorization": "Bearer " + SUPABASE_KEY
-  };
+  const HEADERS = { "Content-Type": "application/json", "apikey": SUPABASE_KEY, "Authorization": "Bearer " + SUPABASE_KEY };
 
   let mangas = [];
   let activeTag = null;
+  let activeTipo = "todos";
 
   async function fetchMangas() {
     try {
       const res = await fetch(`${SUPABASE_URL}/rest/v1/mangas?order=id.desc`, { headers: HEADERS });
-      if (!res.ok) throw new Error("Error " + res.status);
+      if (!res.ok) throw new Error();
       mangas = await res.json();
       renderGrid();
-    } catch(e) {
-      document.getElementById("grid").innerHTML = `<div class="state-msg"><div class="emoji">⚠️</div><p>No se pudo conectar a la base de datos.<br>Verifica tu conexión e intenta de nuevo.</p></div>`;
+    } catch {
+      document.getElementById("grid").innerHTML = `<div class="state-msg"><div class="emoji">⚠️</div><p>No se pudo conectar a la base de datos.</p></div>`;
     }
+  }
+
+  function setTipo(tipo) {
+    activeTipo = tipo;
+    activeTag = null;
+    document.querySelectorAll(".tipo-tab").forEach(b => b.classList.toggle("active", b.dataset.tipo === tipo));
+    renderGrid();
   }
 
   function allTags() {
     const s = new Set();
     mangas.forEach(m => {
+      if (activeTipo !== "todos" && m.tags !== activeTipo && (m.title||"") && m.tipo !== activeTipo) return;
       if (m.tags) m.tags.split(",").map(t => t.trim()).filter(Boolean).forEach(t => s.add(t));
     });
     return [...s].sort();
@@ -202,64 +237,64 @@
   function renderGrid() {
     const q = (document.getElementById("search").value || "").toLowerCase();
     const filtered = mangas.filter(m => {
-      const matchQ = !q ||
-        (m.title||"").toLowerCase().includes(q) ||
-        (m.description||"").toLowerCase().includes(q) ||
-        (m.tags||"").toLowerCase().includes(q);
+      const matchTipo = activeTipo === "todos" || (m.tipo||"Manga") === activeTipo;
+      const matchQ = !q || (m.title||"").toLowerCase().includes(q) || (m.description||"").toLowerCase().includes(q) || (m.tags||"").toLowerCase().includes(q);
       const matchTag = !activeTag || (m.tags||"").split(",").map(t=>t.trim()).includes(activeTag);
-      return matchQ && matchTag;
+      return matchTipo && matchQ && matchTag;
     });
 
-    document.getElementById("filters").innerHTML = allTags().map(t =>
+    const tags = new Set();
+    mangas.filter(m => activeTipo === "todos" || (m.tipo||"Manga") === activeTipo)
+          .forEach(m => { if (m.tags) m.tags.split(",").map(t=>t.trim()).filter(Boolean).forEach(t => tags.add(t)); });
+    document.getElementById("filters").innerHTML = [...tags].sort().map(t =>
       `<button class="filter-btn${activeTag===t?' active':''}" onclick="toggleTag('${t}')">${t}</button>`
     ).join('');
 
     document.getElementById("count").textContent = filtered.length === mangas.length
-      ? `${mangas.length} manga${mangas.length !== 1 ? 's' : ''} en la biblioteca`
-      : `${filtered.length} de ${mangas.length} mangas`;
+      ? `${filtered.length} entradas en la biblioteca`
+      : `${filtered.length} resultados`;
 
     const grid = document.getElementById("grid");
     if (!filtered.length) {
-      grid.innerHTML = `<div class="state-msg"><div class="emoji">✿</div><p>No se encontraron mangas con ese criterio.</p></div>`;
+      grid.innerHTML = `<div class="state-msg"><div class="emoji">✿</div><p>No se encontraron resultados.</p></div>`;
       return;
     }
 
     grid.innerHTML = filtered.map((m, i) => {
       const tagList = (m.tags||"").split(",").map(t=>t.trim()).filter(Boolean);
+      const tipo = m.tipo || "Manga";
       return `
         <div class="card" onclick="openDetail(${m.id})" style="animation-delay:${i*40}ms">
           <div class="card-cover">
-            ${m.cover
-              ? `<img src="${m.cover}" alt="${m.title}" onerror="this.outerHTML='<div class=card-cover-placeholder>✿</div>'" />`
-              : `<div class="card-cover-placeholder">✿</div>`}
+            ${m.cover ? `<img src="${m.cover}" alt="${m.title}" onerror="this.outerHTML='<div class=card-cover-placeholder>✿</div>'" />` : `<div class="card-cover-placeholder">✿</div>`}
           </div>
           <div class="card-body">
             <div class="card-title">${m.title}</div>
             <div class="card-desc">${m.description||''}</div>
-            <div class="tags">${tagList.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+            <div class="tags">
+              <span class="tipo-badge">${tipo}</span>
+              ${tagList.map(t=>`<span class="tag">${t}</span>`).join('')}
+            </div>
           </div>
         </div>`;
     }).join('');
   }
 
-  function toggleTag(t) {
-    activeTag = activeTag === t ? null : t;
-    renderGrid();
-  }
+  function toggleTag(t) { activeTag = activeTag === t ? null : t; renderGrid(); }
 
   function openDetail(id) {
     const m = mangas.find(x => x.id === id);
     if (!m) return;
     const tagList = (m.tags||"").split(",").map(t=>t.trim()).filter(Boolean);
+    const tipo = m.tipo || "Manga";
     document.getElementById("detailContent").innerHTML = `
       <div class="detail-top">
         <div class="detail-cover">
-          ${m.cover
-            ? `<img src="${m.cover}" alt="${m.title}" onerror="this.outerHTML='<div class=detail-cover-placeholder>✿</div>'" />`
-            : `<div class="detail-cover-placeholder">✿</div>`}
+          ${m.cover ? `<img src="${m.cover}" alt="${m.title}" onerror="this.outerHTML='<div class=detail-cover-placeholder>✿</div>'" />` : `<div class="detail-cover-placeholder">✿</div>`}
         </div>
         <div class="detail-info">
           <div class="detail-title">${m.title}</div>
+          <span class="detail-tipo">${tipo}</span>
           <div class="detail-desc">${m.description||''}</div>
           <div class="tags">${tagList.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
         </div>
@@ -270,20 +305,15 @@
     document.getElementById("detailOverlay").classList.add("open");
   }
 
-  function closeDetail(e) {
-    if (e.target.id === "detailOverlay") document.getElementById("detailOverlay").classList.remove("open");
-  }
+  function closeDetail(e) { if (e.target.id === "detailOverlay") document.getElementById("detailOverlay").classList.remove("open"); }
+  function closeFormOverlay(e) { if (e.target.id === "formOverlay") document.getElementById("formOverlay").classList.remove("open"); }
 
   function openForm() {
     ["fTitle","fCover","fDesc","fTags"].forEach(id => document.getElementById(id).value = "");
+    document.getElementById("fTipo").value = "Manga";
     const btn = document.getElementById("btnSave");
-    btn.disabled = false;
-    btn.textContent = "Guardar";
+    btn.disabled = false; btn.textContent = "Guardar";
     document.getElementById("formOverlay").classList.add("open");
-  }
-
-  function closeFormOverlay(e) {
-    if (e.target.id === "formOverlay") document.getElementById("formOverlay").classList.remove("open");
   }
 
   async function addManga() {
@@ -291,37 +321,35 @@
     const cover       = document.getElementById("fCover").value.trim();
     const description = document.getElementById("fDesc").value.trim();
     const tags        = document.getElementById("fTags").value.trim();
+    const tipo        = document.getElementById("fTipo").value;
 
     if (!title)       { showToast("El título es obligatorio ✿"); return; }
     if (!description) { showToast("La descripción es obligatoria ✿"); return; }
 
     const btn = document.getElementById("btnSave");
-    btn.disabled = true;
-    btn.textContent = "Guardando...";
+    btn.disabled = true; btn.textContent = "Guardando...";
 
     try {
       const res = await fetch(`${SUPABASE_URL}/rest/v1/mangas`, {
         method: "POST",
         headers: { ...HEADERS, "Prefer": "return=representation" },
-        body: JSON.stringify({ title, cover, description, tags })
+        body: JSON.stringify({ title, cover, description, tags, tipo })
       });
-      if (!res.ok) throw new Error("Error " + res.status);
+      if (!res.ok) throw new Error();
       const [nuevo] = await res.json();
       mangas.unshift(nuevo);
       document.getElementById("formOverlay").classList.remove("open");
       renderGrid();
-      showToast("¡Manga agregado! ✿");
+      showToast("¡Agregado! ✿");
     } catch {
       showToast("Error al guardar. Intenta de nuevo.");
-      btn.disabled = false;
-      btn.textContent = "Guardar";
+      btn.disabled = false; btn.textContent = "Guardar";
     }
   }
 
   function showToast(msg) {
     const t = document.getElementById("toast");
-    t.textContent = msg;
-    t.classList.add("show");
+    t.textContent = msg; t.classList.add("show");
     setTimeout(() => t.classList.remove("show"), 3000);
   }
 
@@ -329,4 +357,3 @@
 </script>
 </body>
 </html>
-
